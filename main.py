@@ -1,8 +1,6 @@
-print("Hello World")
-
 file = open("declaration.txt","r")
 
-wordDict = {'word': 'value'}
+wordDict = {}
 #print(file.read())
 
 data = file.readlines()
@@ -14,17 +12,18 @@ for line in data:
         for letter in word:
             if letter >= 'a' and letter <= 'z' or letter >= 'A' and letter <= 'Z':
                 wordCopy += letter
+            wordCopy = wordCopy.lower();
         #print(wordCopy)
         if(wordCopy not in wordDict):
-            wordDict[len(wordDict)] = (wordCopy,1)
+            wordDict[wordCopy] = 1
         else:
-             wordDict[wordCopy] = value + 1
+            wordDict[wordCopy] += 1
         wordCopy = ""
         
     #print(word)
 
-#print(wordDict[1])
-print(wordDict)
-#words = { 'word': 'When', 'count': 1, }
+#wordDict = sorted(wordDict)
+
+print(wordDict['in'])
 
 #print(words)
