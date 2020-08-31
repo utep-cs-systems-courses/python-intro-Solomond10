@@ -13,37 +13,50 @@ if len(sys.argv) is not 3:
 outputFname = sys.argv[2]
 inputFname = sys.argv[1]
 
-#file = open("declaration.txt","r")
 file = open(inputFname,"r")
 wordDict = {}
-#print(file.read())
 
 data = file.readlines()
 wordCopy = ""
 
-#print("word dictionary: ", wordDict)
+
 for line in data:
-    #print(line)
-    #for word in line:
     for word in line.split():
         #checking to see if the word has any smybols other than a letter
-        #print(word)
         for letter in word:
-            #print(word)
             if letter >= 'a' and letter <= 'z' or letter >= 'A' and letter <= 'Z':
                 wordCopy += letter
-           # elif letter == '-':
-            #    continue
+
+            elif letter == "-" or letter == "'":
+                wordCopy = wordCopy.lower();
+                
+                if(wordCopy not in wordDict):
+                    wordDict[wordCopy] = 1
+                else:
+                    wordDict[wordCopy] += 1
+
+                wordCopy = ""
+                    
+                if letter >= 'a' and letter <= 'z' or letter >= 'A' and letter <= 'Z':
+                    wordCopy += letter
+
             else:
-                break
-            #    print(letter)
-             #   wordCopy = ""
-            wordCopy = wordCopy.lower();
+                continue
+             #   break
+
+        wordCopy = wordCopy.lower();
+
         if(wordCopy not in wordDict):
             wordDict[wordCopy] = 1
+
         else:
             wordDict[wordCopy] += 1
+
         wordCopy = ""
+
+        #if (letter != " "):
+         #   print("what now")
+          #  continue
         
 keys = wordDict.items()
 wordDict = sorted(keys)
