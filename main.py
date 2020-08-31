@@ -14,16 +14,14 @@ for line in data:
                 wordCopy += letter
             wordCopy = wordCopy.lower();
         #print(wordCopy)
+        #wordDict = sorted(wordDict,key = wordCopy)
         if(wordCopy not in wordDict):
             wordDict[wordCopy] = 1
         else:
             wordDict[wordCopy] += 1
         wordCopy = ""
         
-    #print(word)
+keys = wordDict.items()
+wordDict = sorted(keys)
 
-#wordDict = sorted(wordDict)
-
-print(wordDict['in'])
-
-#print(words)
+print(wordDict)
