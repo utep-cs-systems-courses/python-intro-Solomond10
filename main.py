@@ -23,5 +23,27 @@ for line in data:
         
 keys = wordDict.items()
 wordDict = sorted(keys)
+#print(wordDict[0])
 
-print(wordDict)
+
+count = 0
+
+outputFile = open("output.txt","w")
+for k in wordDict:
+    #print("INSIDE LOOP: ", k)
+    #a = k.split(",")
+
+    #print("INSIDE LOOP: ", k)
+    #outputFile.write(str(k)+"\n")
+
+    for i in k:
+        if count is 0:
+    #print("INSIDE INSIDE LOOP: ", i)
+            outputFile.write(str(i))
+            count = count + 1
+        elif count is 1:
+            outputFile.write(" "+str(i)+"\n")
+            count = 0
+        
+outputFile.close()
+
