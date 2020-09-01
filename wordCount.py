@@ -1,9 +1,6 @@
 #! /usr/bin/env python3
 
 import sys        # command line argument
-import re         # regular expression tools
-import os         # checking if file exists
-import subprocess # executing program
 
 # set input and output files
 if len(sys.argv) is not 3:
@@ -19,58 +16,48 @@ wordDict = {}
 data = file.readlines()
 wordCopy = ""
 
+# Checks to see if symbol is a valid letter
+def letterCheck(str):
+    if letter >= 'a' and letter <= 'z' or letter >= 'A' and letter <= 'Z':
+        return 1
+    return 0
 
+# Checks to see if word is in the dictionary
+def dictionaryCheck(str):
+    if wordCopy not in wordDict:
+        return 1
+    return 0
+
+# Loop first reads line of data then a specific word in a line then the letter of a specific word
 for line in data:
-    for word in line.split():
-        #checking to see if the word has any smybols other than a letter
+    for word in line:
         for letter in word:
-            if letter >= 'a' and letter <= 'z' or letter >= 'A' and letter <= 'Z':
+            if letterCheck(letter) == 1:
                 wordCopy += letter
-
-            elif letter == "-" or letter == "'":
-                wordCopy = wordCopy.lower();
-                
-                if(wordCopy not in wordDict):
+            else:
+                wordCopy = wordCopy.lower()
+                if dictionaryCheck(wordCopy) == 1:
                     wordDict[wordCopy] = 1
+
                 else:
                     wordDict[wordCopy] += 1
+                wordCopy = "" # Clears word copy so a new word can be copied
+                
+del(wordDict['']) # deletes number of spaces counted from dictionary
+keys = wordDict.items() # Setting keys equal to all the items in the dictionary
+wordDict = sorted(keys) # Sorts items in dictionary
 
-                wordCopy = ""
-                    
-                if letter >= 'a' and letter <= 'z' or letter >= 'A' and letter <= 'Z':
-                    wordCopy += letter
+count = 1 # Count is simply used so the data in file is properly formatted
 
-            else:
-                continue
-             #   break
+outputFile = open(outputFname,"w") # opens output file
 
-        wordCopy = wordCopy.lower();
-
-        if(wordCopy not in wordDict):
-            wordDict[wordCopy] = 1
-
-        else:
-            wordDict[wordCopy] += 1
-
-        wordCopy = ""
-
-        #if (letter != " "):
-         #   print("what now")
-          #  continue
-        
-keys = wordDict.items()
-wordDict = sorted(keys)
-
-count = 0
-
-outputFile = open(outputFname,"w")
 for k in wordDict:
     for i in k:
-        if count is 0:
+        if count is 1:
             outputFile.write(str(i))
             count = count + 1
-        elif count is 1:
+        elif count is 2:
             outputFile.write(" "+str(i)+"\n")
-            count = 0
+            count = 1
         
-outputFile.close()
+outputFile.close() # closes output file
