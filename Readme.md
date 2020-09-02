@@ -28,3 +28,10 @@ Note that there are two major dialects of Python.  Python 3.* is
 incompatible with 2*.  As a result, Python 2.7 remains popular.  All
 of our examples were ported to 3.* during the summer of 2018.  We (mildly)
 encourage students to use that dialect of Python.
+
+The wordCount.py file simply reads from the input file checks each to see each
+letter in a word is a letter and not a symbol, then adds the word to the
+dictionary along with the number of times the word appears. This is done until
+the end of the file is reached. Once all of the words and the number of
+occurences are in the dictionary they are then written onto the output file.
+words are added to the dictionary 
